@@ -151,6 +151,15 @@ client.connect(err => {
             })
     })
 
+    // Get Health Tips Data from DB
+    app.get('/healthTipsData', (req, res) => {
+        healthTipsDataCollection.find()
+            .toArray((err, healthTipsData) => {
+                console.log("healthTipsData : ", healthTipsData);
+                res.send(healthTipsData);
+            })
+    })
+
     // console.log(err);
     console.log('DB connection successfully!');
     // perform actions on the collection object
