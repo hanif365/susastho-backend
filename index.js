@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -128,6 +129,15 @@ client.connect(err => {
             .toArray((err, bloodBankInfo) => {
                 console.log("Doctors Info : ", bloodBankInfo);
                 res.send(bloodBankInfo);
+            })
+    })
+
+    // Cancel Appointment
+    app.delete('/cancelAppointment/:id', (req, res) => {
+        console.log(req.params.id);
+        appointmentCollection.deleteOne({ _id: ObjectId(req.params.id) })
+            .then(result => {
+                console.log(result);
             })
     })
 
