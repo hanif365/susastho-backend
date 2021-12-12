@@ -18,12 +18,10 @@ app.get('/', (req, res) => {
     res.send('Welcome to Hanif! DB Working!')
 })
 
-console.log(process.env.DB_USER)
-console.log(process.env.DB_PASS)
-console.log(process.env.DB_NAME)
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cwfp8.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-console.log(uri)
+
+// console.log(uri);
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const doctorsCollection = client.db("susastho").collection("doctors");
@@ -31,6 +29,7 @@ client.connect(err => {
     const adminCollection = client.db("susastho").collection("admin");
     const emergencyInfoCollection = client.db("susastho").collection("emergencyInfo");
     const bloodBankInfoCollection = client.db("susastho").collection("bloodBankInfo");
+    const healthTipsDataCollection = client.db("susastho").collection("healthTipsData");
 
 
     // Insert a doctor info in the DB
@@ -141,6 +140,16 @@ client.connect(err => {
             })
     })
 
+    // Health Tips Data insert into DB
+    app.post('/addhealthtips', (req, res) => {
+        const addhealthtips = req.body;
+        console.log('Adding new Doctor', addhealthtips);
+        healthTipsDataCollection.insertOne(addhealthtips)
+            .then(result => {
+                console.log('Inserted Count ', result.insertedCount)
+                res.send(result.insertedCount > 0)
+            })
+    })
 
     // console.log(err);
     console.log('DB connection successfully!');
@@ -149,6 +158,4 @@ client.connect(err => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(port)
