@@ -29,6 +29,7 @@ client.connect(err => {
     const appointmentCollection = client.db("susastho").collection("appointment");
     const adminCollection = client.db("susastho").collection("admin");
     const emergencyInfoCollection = client.db("susastho").collection("emergencyInfo");
+    const bloodBankInfoCollection = client.db("susastho").collection("bloodBankInfo");
 
 
     // Insert a doctor info in the DB
@@ -97,7 +98,7 @@ client.connect(err => {
         emergencyInfoCollection.insertOne(addEmergencyInfo)
             .then(result => {
                 console.log('Inserted Count ', result.insertedCount)
-                // res.send(result.insertedCount > 0)
+                res.send(result.insertedCount > 0)
             })
     })
 
@@ -107,6 +108,26 @@ client.connect(err => {
             .toArray((err, emergencyInfo) => {
                 console.log("Doctors Info : ", emergencyInfo);
                 res.send(emergencyInfo);
+            })
+    })
+
+    // Blood Bank Info insert into DB
+    app.post('/addbloodbankinfo', (req, res) => {
+        const addbloodbankinfo = req.body;
+        console.log('Adding new Doctor', addbloodbankinfo);
+        bloodBankInfoCollection.insertOne(addbloodbankinfo)
+            .then(result => {
+                console.log('Inserted Count ', result.insertedCount)
+                res.send(result.insertedCount > 0)
+            })
+    })
+
+    // Get Blood Bank Info from DB
+    app.get('/bloodBankInfo', (req, res) => {
+        bloodBankInfoCollection.find()
+            .toArray((err, bloodBankInfo) => {
+                console.log("Doctors Info : ", bloodBankInfo);
+                res.send(bloodBankInfo);
             })
     })
 
