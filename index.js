@@ -102,6 +102,15 @@ client.connect(err => {
             })
     })
 
+      // Check an admin super-admin or not
+      app.post('/isSuperAdmin', (req, res) => {
+        const email = req.body.email;
+        superAdminCollection.find({ email: email })
+            .toArray((err, superadmin) => {
+                res.send(superadmin.length > 0);
+            })
+    })
+
     // Emergency Info insert into DB
     app.post('/addemergencyinfo', (req, res) => {
         const addEmergencyInfo = req.body;
