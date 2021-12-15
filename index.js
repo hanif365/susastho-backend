@@ -27,6 +27,7 @@ client.connect(err => {
     const doctorsCollection = client.db("susastho").collection("doctors");
     const appointmentCollection = client.db("susastho").collection("appointment");
     const adminCollection = client.db("susastho").collection("admin");
+    const superAdminCollection = client.db("susastho").collection("superadmin");
     const emergencyInfoCollection = client.db("susastho").collection("emergencyInfo");
     const bloodBankInfoCollection = client.db("susastho").collection("bloodBankInfo");
     const healthTipsDataCollection = client.db("susastho").collection("healthTipsData");
@@ -45,7 +46,7 @@ client.connect(err => {
 
     // Get doctor info from DB
     app.get('/doctors', (req, res) => {
-        doctorsCollection.find()
+        doctorsCollection.find({ status: "confirmed" })
             .toArray((err, doctorsInfo) => {
                 console.log("Doctors Info : ", doctorsInfo);
                 res.send(doctorsInfo);
@@ -88,6 +89,16 @@ client.connect(err => {
         adminCollection.find({ email: email })
             .toArray((err, admin) => {
                 res.send(admin.length > 0);
+            })
+    })
+
+    // Make Super Admin
+    app.post('/addSuperAdmin', (req, res) => {
+        const newSuperAdmin = req.body;
+        superAdminCollection.insertOne(newSuperAdmin)
+            .then(result => {
+                console.log('Inserted Count ', result.insertedCount)
+                res.send(result.insertedCount > 0)
             })
     })
 
