@@ -192,7 +192,7 @@ client.connect(err => {
 
     // code for status change
 
-    app.patch('/confirmed/:id', (req, res) => {
+    app.patch('/doctorConfirmed/:id', (req, res) => {
         console.log('id', req.params.id);
         console.log('status', req.body.status);
         doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
@@ -204,7 +204,7 @@ client.connect(err => {
             })
     })
 
-    // app.patch('/ongoing/:id', (req, res) => {
+    // app.patch('/doctorOngoing/:id', (req, res) => {
     //     console.log('id', req.params.id);
     //     console.log('status', req.body.status);
     //     doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
@@ -216,7 +216,7 @@ client.connect(err => {
     //         })
     // })
 
-    app.patch('/pending/:id', (req, res) => {
+    app.patch('/doctorPending/:id', (req, res) => {
         console.log('id', req.params.id);
         console.log('status', req.body.status);
         doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
