@@ -192,7 +192,7 @@ client.connect(err => {
 
     // code for status change
 
-    app.patch('/done/:id', (req, res) => {
+    app.patch('/confirmed/:id', (req, res) => {
         console.log('id', req.params.id);
         console.log('status', req.body.status);
         doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
