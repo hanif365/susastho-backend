@@ -46,7 +46,7 @@ client.connect(err => {
 
     // Get doctor info from DB
     app.get('/doctors', (req, res) => {
-        doctorsCollection.find({ status: "confirmed" })
+        doctorsCollection.find({ status: "Confirmed" })
             .toArray((err, doctorsInfo) => {
                 console.log("Doctors Info : ", doctorsInfo);
                 res.send(doctorsInfo);
@@ -197,7 +197,7 @@ client.connect(err => {
         console.log('status', req.body.status);
         doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
             {
-                $set: { 'status': 'Done' }
+                $set: { 'status': 'Confirmed' }
             })
             .then(result => {
                 console.log(result);
