@@ -53,6 +53,15 @@ client.connect(err => {
             })
     })
 
+    // Doctors for confirmation(Super Admin Panel)
+    app.get('/doctorsForConfirmation', (req, res) => {
+        doctorsCollection.find()
+            .toArray((err, doctorsForConfirmationInfo) => {
+                console.log("Doctors Info : ", doctorsForConfirmationInfo);
+                res.send(doctorsForConfirmationInfo);
+            })
+    })
+
     // Insert appointment info in the DB
     app.post('/addAppointment', (req, res) => {
         const addAppointment = req.body;
