@@ -83,6 +83,16 @@ client.connect(err => {
             })
     })
 
+    // Get All Appointment (For Super Admin panel)
+    app.get('/allAppointment', (req, res) => {
+        console.log(req.query.email);
+        appointmentCollection.find()
+            .toArray((err, allAppointmentInfo) => {
+                console.log("Doctors Info : ", allAppointmentInfo);
+                res.send(allAppointmentInfo);
+            })
+    })
+
     // Make admin
     app.post('/addAdmin', (req, res) => {
         const newAdmin = req.body;
