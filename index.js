@@ -75,7 +75,8 @@ client.connect(err => {
 
     // Get appointment info from the DB
     app.get('/appointment', (req, res) => {
-        appointmentCollection.find()
+        console.log(req.query.email);
+        appointmentCollection.find({ email: req.query.email })
             .toArray((err, appointmentInfo) => {
                 console.log("Doctors Info : ", appointmentInfo);
                 res.send(appointmentInfo);
