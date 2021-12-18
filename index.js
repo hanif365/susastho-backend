@@ -102,8 +102,8 @@ client.connect(err => {
             })
     })
 
-      // Check an admin super-admin or not
-      app.post('/isSuperAdmin', (req, res) => {
+    // Check an admin super-admin or not
+    app.post('/isSuperAdmin', (req, res) => {
         const email = req.body.email;
         superAdminCollection.find({ email: email })
             .toArray((err, superadmin) => {
@@ -177,6 +177,45 @@ client.connect(err => {
             .toArray((err, healthTipsData) => {
                 console.log("healthTipsData : ", healthTipsData);
                 res.send(healthTipsData);
+            })
+    })
+
+
+    // code for status change
+
+    app.patch('/done/:id', (req, res) => {
+        console.log('id', req.params.id);
+        console.log('status', req.body.status);
+        doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
+            {
+                $set: { 'status': 'Done' }
+            })
+            .then(result => {
+                console.log(result);
+            })
+    })
+
+    // app.patch('/ongoing/:id', (req, res) => {
+    //     console.log('id', req.params.id);
+    //     console.log('status', req.body.status);
+    //     doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
+    //         {
+    //             $set: { 'status': 'Ongoing' }
+    //         })
+    //         .then(result => {
+    //             console.log(result);
+    //         })
+    // })
+
+    app.patch('/pending/:id', (req, res) => {
+        console.log('id', req.params.id);
+        console.log('status', req.body.status);
+        doctorsCollection.updateOne({ _id: ObjectId(req.params.id) },
+            {
+                $set: { 'status': 'Pending' }
+            })
+            .then(result => {
+                console.log(result);
             })
     })
 
