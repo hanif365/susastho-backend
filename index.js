@@ -103,6 +103,16 @@ client.connect(err => {
             })
     })
 
+      // Get appointment info from the DB in the Doctor Dashboard
+      app.get('/appointmentpatients', (req, res) => {
+        console.log(req.query.email);
+        appointmentCollection.find({ Doctor_Email: req.query.email })
+            .toArray((err, appointmentPatientsInfo) => {
+                console.log("Doctors Info : ", appointmentPatientsInfo);
+                res.send(appointmentPatientsInfo);
+            })
+    })
+
     // Make admin
     app.post('/addAdmin', (req, res) => {
         const newAdmin = req.body;
