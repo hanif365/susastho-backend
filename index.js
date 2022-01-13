@@ -141,6 +141,15 @@ client.connect(err => {
             })
     })
 
+      // Check an admin doctor or not
+      app.post('/isDoctor', (req, res) => {
+        const email = req.body.email;
+        doctorsCollection.find({ Doctor_Email: email })
+            .toArray((err, doctor) => {
+                res.send(doctor.length > 0);
+            })
+    })
+
     // Emergency Info insert into DB
     app.post('/addemergencyinfo', (req, res) => {
         const addEmergencyInfo = req.body;
