@@ -19,10 +19,12 @@ const port = process.env.PORT || 5000
 
 // app.use(cors({ origin: true }));
 
+// new cors code
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
 });
+// end
 
 
 app.use(cors());
@@ -247,14 +249,14 @@ client.connect(err => {
             })
     })
 
-    // Get doctor info from DB
-    // app.get('/doctors', (req, res) => {
-    //     doctorsCollection.find({ status: "Confirmed" })
-    //         .toArray((err, doctorsInfo) => {
-    //             console.log("Doctors Info : ", doctorsInfo);
-    //             res.send(doctorsInfo);
-    //         })
-    // })
+    // Get Testimonials info from DB
+    app.get('/testimonials', (req, res) => {
+        testimonialsCollection.find()
+            .toArray((err, testimonialsInfo) => {
+                console.log("TestimonialsInfo Info : ", testimonialsInfo);
+                res.send(testimonialsInfo);
+            })
+    })
 
     // 
 
