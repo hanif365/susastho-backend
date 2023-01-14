@@ -104,8 +104,8 @@ client.connect(err => {
             })
     })
 
-      // Get appointment info from the DB in the Doctor Dashboard
-      app.get('/appointmentpatients', (req, res) => {
+    // Get appointment info from the DB in the Doctor Dashboard
+    app.get('/appointmentpatients', (req, res) => {
         console.log(req.query.email);
         appointmentCollection.find({ Doctor_Email: req.query.email })
             .toArray((err, appointmentPatientsInfo) => {
@@ -152,8 +152,8 @@ client.connect(err => {
             })
     })
 
-      // Check an admin doctor or not
-      app.post('/isDoctor', (req, res) => {
+    // Check an admin doctor or not
+    app.post('/isDoctor', (req, res) => {
         const email = req.body.email;
         doctorsCollection.find({ Doctor_Email: email })
             .toArray((err, doctor) => {
@@ -232,14 +232,14 @@ client.connect(err => {
 
 
     // code for add testimonials
-      app.post('/addTestimonial', (req, res) => {
+    app.post('/addTestimonial', (req, res) => {
         const addTestimonial = req.body;
         console.log('Adding new Testimonial', addTestimonial);
-        // testimonialsCollection.insertOne(addTestimonial)
-        //     .then(result => {
-        //         console.log('Inserted Count ', result.insertedCount)
-        //         res.send(result.insertedCount > 0)
-        //     })
+        testimonialsCollection.insertOne(addTestimonial)
+            .then(result => {
+                console.log('Inserted Count ', result.insertedCount)
+                res.send(result.insertedCount > 0)
+            })
     })
 
     // Get doctor info from DB
