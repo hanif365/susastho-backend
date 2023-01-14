@@ -41,6 +41,7 @@ client.connect(err => {
     const emergencyInfoCollection = client.db("susastho").collection("emergencyInfo");
     const bloodBankInfoCollection = client.db("susastho").collection("bloodBankInfo");
     const healthTipsDataCollection = client.db("susastho").collection("healthTipsData");
+    const testimonialsCollection = client.db("susastho").collection("testimonialsData");
 
 
     // Insert a doctor info in the DB
@@ -228,6 +229,29 @@ client.connect(err => {
                 res.send(healthTipsData);
             })
     })
+
+
+    // code for add testimonials
+      app.post('/addTestimonial', (req, res) => {
+        const addTestimonial = req.body;
+        console.log('Adding new Testimonial', addTestimonial);
+        // testimonialsCollection.insertOne(addTestimonial)
+        //     .then(result => {
+        //         console.log('Inserted Count ', result.insertedCount)
+        //         res.send(result.insertedCount > 0)
+        //     })
+    })
+
+    // Get doctor info from DB
+    // app.get('/doctors', (req, res) => {
+    //     doctorsCollection.find({ status: "Confirmed" })
+    //         .toArray((err, doctorsInfo) => {
+    //             console.log("Doctors Info : ", doctorsInfo);
+    //             res.send(doctorsInfo);
+    //         })
+    // })
+
+    // 
 
 
     // code for status change
