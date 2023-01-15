@@ -7,37 +7,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config()
 
-
 const port = process.env.PORT || 5000
 
-// app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//     next();
-// });
 
-// app.use(cors({ origin: true }));
+// app.use(cors());
 
-// new cors code
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     next();
-// });
+app.use(cors({
+    origin: "*"
+}));
 
-// 
-
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
- });
-// end
-
-
-app.use(cors());
 app.use(bodyParser.json());
 
 
