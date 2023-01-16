@@ -7,7 +7,8 @@
     "node": "16.x"
   },
   "scripts": {
-    "start":"nodemon index",
+    "start":"node index",
+    "dev":"nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
