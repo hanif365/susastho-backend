@@ -1,17 +1,20 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 
-const cors = require('cors');
+
 const bodyParser = require('body-parser');
 require('dotenv').config()
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
 
 // app.use(cors());
 
+// make origin just for frontend url (https://susastho.netlify.app) in production time
 app.use(cors({
     origin: "*"
 }));
