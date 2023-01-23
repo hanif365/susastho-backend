@@ -83,14 +83,14 @@ client.connect(err => {
     })
 
     // Get appointment info from the DB
-    app.get('/appointment', (req, res) => {
-        console.log(req.query.email);
-        appointmentCollection.find({ User_Email: req.query.email })
-            .toArray((err, appointmentInfo) => {
-                console.log("Doctors Info : ", appointmentInfo);
-                res.send(appointmentInfo);
-            })
-    })
+    // app.get('/appointment', (req, res) => {
+    //     console.log(req.query.email);
+    //     appointmentCollection.find({ User_Email: req.query.email })
+    //         .toArray((err, appointmentInfo) => {
+    //             console.log("Doctors Info : ", appointmentInfo);
+    //             res.send(appointmentInfo);
+    //         })
+    // })
 
     // Get All Appointment (For Super Admin panel)
     app.get('/allAppointment', (req, res) => {
