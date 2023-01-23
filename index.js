@@ -84,12 +84,10 @@ client.connect(err => {
 
     // Get appointment info from the DB
     app.get('/appointment', (req, res) => {
-        console.log("Tesyyyy",req.query.email);
-        console.log("All query: ", req.query);
-        
-        appointmentCollection.find({ User_Email: req.query.email })
+        // appointmentCollection.find({ User_Email: req.query.email })
+        appointmentCollection.find({ uid: req.query.uid })
             .toArray((err, appointmentInfo) => {
-                console.log("Doctors Info : ", appointmentInfo);
+                console.log("Appointment Info : ", appointmentInfo);
                 res.send(appointmentInfo);
             })
     })
